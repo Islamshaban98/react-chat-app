@@ -1,6 +1,7 @@
 $indent_1: 5px;
 $indent_2: 10px;
 $indent_3: 15px;
+$indent_4: 20px;
 
 .link-unstyled {
   &,
@@ -185,6 +186,9 @@ $indent_3: 15px;
 
 .mt-3 {
   margin-top: $indent_3;
+}
+.mt-4 {
+  margin-top: $indent_4;
 }
 
 .mb-1 {
