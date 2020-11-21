@@ -18,14 +18,14 @@ const EditableInput = ({
     setisEditable(c => !c);
     setNewnickname(defaultValue);
   };
-  const onCheck = () => {
+  const onCheck = async () => {
     const nickName = newNickname.trim();
     if (nickName === '') {
       Alert.info(emptyMessage, 4000);
     }
     if (nickName !== defaultValue) {
-      onSave(nickName);
-      setNewnickname(nickName);
+      await onSave(nickName);
+      //   setNewnickname(nickName);
     }
     setisEditable(false);
   };
