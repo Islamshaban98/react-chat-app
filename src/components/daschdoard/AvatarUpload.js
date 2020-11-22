@@ -1,16 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Alert, Button, Modal } from 'rsuite';
 import ModalBody from 'rsuite/lib/Modal/ModalBody';
 import ModalFooter from 'rsuite/lib/Modal/ModalFooter';
 import ModalTitle from 'rsuite/lib/Modal/ModalTitle';
 import AvatarEditor from 'react-avatar-editor';
 import { useModal } from '../../misc/useModal';
+import { storage } from '../../misc/firebase';
+import { useProfile } from '../../context/ProfileContext';
 
 const AvatarUpload = () => {
   const [avatar, setAvatar] = useState(null);
+  const avatarEditorRef = useRef();
+  const { profile } = useProfile();
   const { open, close, isOpen } = useModal();
   const acceptanceFile = ['image/png', 'image/jpeg', 'image/jpg'];
   const isAvailableFile = file => acceptanceFile.includes(file.type);
+
   const onAvatarChange = e => {
     const { files } = e.target;
     if (files.length === 1) {
@@ -23,6 +28,32 @@ const AvatarUpload = () => {
       }
     }
   };
+
+  const convertToBlob = file => {
+    return new Promise((resolve, reject) => {
+      file.toBlob(blob => {
+        if (blob) {
+          resolve(blob);
+        } else {
+          reject(new Error('file processing filed'));
+        }
+      });
+    });
+  };
+  const onUploadClick = async () => {
+    const refElement = avatarEditorRef.current.getImageScaledToCanvas();
+    try {
+      const convertedFile = await convertToBlob(refElement);
+      const filePath = storage
+        .ref(`/profile/${profile.uid}`)
+        .child('profileImageFile');
+      await filePath.put(convertedFile);
+      Alert.success('upload avatar successfully', 4000);
+    } catch (err) {
+      Alert.error('upload avatar failed', 4000);
+    }
+  };
+
   return (
     <div className="mt-3 text-center">
       <div>
@@ -43,6 +74,7 @@ const AvatarUpload = () => {
           <ModalBody>
             <div className="d-flex justify-content-center align-items-center">
               <AvatarEditor
+                ref={avatarEditorRef}
                 image={avatar}
                 width={250}
                 height={250}
@@ -55,7 +87,7 @@ const AvatarUpload = () => {
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button color="blue" appearance="ghost">
+            <Button color="blue" appearance="ghost" onClick={onUploadClick}>
               Upload Avatar
             </Button>
             <Button color="blue" onClick={close}>
