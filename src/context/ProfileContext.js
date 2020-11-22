@@ -15,6 +15,7 @@ export const ProfileProvider = ({ children }) => {
         userRef = database.ref(`/profiles/${authObj.uid}`);
         userRef.on('value', script => {
           const { name, createdAt } = script.val();
+
           const data = {
             name,
             createdAt,
@@ -34,6 +35,7 @@ export const ProfileProvider = ({ children }) => {
     });
     return () => {
       authUnsub();
+
       if (userRef) {
         userRef.off();
       }

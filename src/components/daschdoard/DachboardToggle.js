@@ -11,14 +11,14 @@ const DachboardToggle = () => {
     Alert.info('you have been logged out', 4000);
   };
 
-  const is992px = useMediaQuery('(max-width: 992px)');
+  const is500px = useMediaQuery('(max-width: 500px)');
   return (
     <>
       <Button block color="blue" onClick={open}>
         <Icon icon="dashboard" /> Dashboard
       </Button>
       <Drawer
-        full={is992px}
+        full={is500px}
         show={isOpen}
         onHide={close}
         placement="left"
