@@ -4,9 +4,10 @@ import ModalBody from 'rsuite/lib/Modal/ModalBody';
 import ModalFooter from 'rsuite/lib/Modal/ModalFooter';
 import ModalTitle from 'rsuite/lib/Modal/ModalTitle';
 import AvatarEditor from 'react-avatar-editor';
-import { useModal } from '../../misc/useModal';
-import { storage } from '../../misc/firebase';
-import { useProfile } from '../../context/ProfileContext';
+import { useModal } from '../misc/useModal';
+import { database, storage } from '../misc/firebase';
+import { useProfile } from '../context/ProfileContext';
+import ProfileImage from './profileImage';
 
 const AvatarUpload = () => {
   const [avatar, setAvatar] = useState(null);
@@ -47,7 +48,12 @@ const AvatarUpload = () => {
       const filePath = storage
         .ref(`/profile/${profile.uid}`)
         .child('profileImageFile');
-      await filePath.put(convertedFile);
+      const uploadAvatarResult = await filePath.put(convertedFile, {
+        casheControl: `public, max-age=${3600 * 24 * 3}`,
+      });
+      const downloadUrl = await uploadAvatarResult.ref.getDownloadURL();
+      database.ref(`/profiles/${profile.uid}`).child('avatar').set(downloadUrl);
+
       Alert.success('upload avatar successfully', 4000);
     } catch (err) {
       Alert.error('upload avatar failed', 4000);
@@ -56,6 +62,11 @@ const AvatarUpload = () => {
 
   return (
     <div className="mt-3 text-center">
+      <ProfileImage
+        src={profile.avatar}
+        name={profile.name}
+        className="width-200 height-200 img-fullsize font-huge"
+      />
       <div>
         <label htmlFor="avatar-input" className="d-block cursor-pointer padded">
           <h6>update your avatar</h6>

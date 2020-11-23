@@ -14,11 +14,11 @@ export const ProfileProvider = ({ children }) => {
       if (authObj) {
         userRef = database.ref(`/profiles/${authObj.uid}`);
         userRef.on('value', script => {
-          const { name, createdAt } = script.val();
-
+          const { name, createdAt, avatar } = script.val();
           const data = {
             name,
             createdAt,
+            avatar,
             uid: authObj.uid,
             email: authObj.email,
           };

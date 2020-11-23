@@ -3,7 +3,7 @@ import { Alert, Button, Divider, Drawer } from 'rsuite';
 import { useProfile } from '../../context/ProfileContext';
 import { database } from '../../misc/firebase';
 import EditableInput from '../EditableInput';
-import AvatarUpload from './AvatarUpload';
+import AvatarUpload from '../AvatarUpload';
 import LinkSocial from './LinkSocial';
 
 const Daschboard = ({ signOut }) => {
