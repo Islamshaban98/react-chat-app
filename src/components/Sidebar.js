@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
+import { Divider } from 'rsuite';
+import ChannelsList from '../pages/channels/ChannelsList';
 // import { useProfile } from '../context/ProfileContext';
 import DachboardToggle from './daschdoard/DachboardToggle';
 import RoomBtn from './RoomBtn';
@@ -6,13 +8,23 @@ import RoomBtn from './RoomBtn';
 
 const Sidebar = () => {
   // const { profile } = useProfile();
+  const toSidebarRef = useRef();
+  const [height, setHight] = useState(0);
+
+  useEffect(() => {
+    if (toSidebarRef.current) {
+      setHight(toSidebarRef.current.scrollHeight);
+    }
+  }, [toSidebarRef]);
 
   return (
     <div className="h-100 pt-2">
-      <div>
+      <div ref={toSidebarRef}>
         <DachboardToggle />
+        <RoomBtn />
+        <Divider>Join conversation</Divider>
       </div>
-      <RoomBtn />
+      <ChannelsList listHeight={height} />
       {/* <ProfileImage
         src={profile.avatar}
         name={profile.name}
