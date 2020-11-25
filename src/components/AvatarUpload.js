@@ -11,6 +11,7 @@ import ProfileImage from './profileImage';
 
 const AvatarUpload = () => {
   const [avatar, setAvatar] = useState(null);
+  const [isLoading, setIsloading] = useState(false);
   const avatarEditorRef = useRef();
   const { profile } = useProfile();
   const { open, close, isOpen } = useModal();
@@ -44,18 +45,18 @@ const AvatarUpload = () => {
   const onUploadClick = async () => {
     const refElement = avatarEditorRef.current.getImageScaledToCanvas();
     try {
+      setIsloading(true);
       const convertedFile = await convertToBlob(refElement);
-      const filePath = storage
-        .ref(`/profile/${profile.uid}`)
-        .child('profileImageFile');
+      const filePath = storage.ref(`/profile/${profile.uid}`).child('avatar');
       const uploadAvatarResult = await filePath.put(convertedFile, {
-        casheControl: `public, max-age=${3600 * 24 * 3}`,
+        cacheControl: `public, max-age=${3600 * 24 * 3}`,
       });
       const downloadUrl = await uploadAvatarResult.ref.getDownloadURL();
       database.ref(`/profiles/${profile.uid}`).child('avatar').set(downloadUrl);
-
+      setIsloading(false);
       Alert.success('upload avatar successfully', 4000);
     } catch (err) {
+      setIsloading(false);
       Alert.error('upload avatar failed', 4000);
     }
   };
@@ -98,7 +99,12 @@ const AvatarUpload = () => {
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button color="blue" appearance="ghost" onClick={onUploadClick}>
+            <Button
+              color="blue"
+              appearance="ghost"
+              onClick={onUploadClick}
+              disabled={isLoading}
+            >
               Upload Avatar
             </Button>
             <Button color="blue" onClick={close}>

@@ -5,6 +5,14 @@
        ".write":"$user_id === auth.uid"
     }
   },
+  "channels":{
+    ".read":"auth!==null",
+    ".write":"auth!==null",
+    "$channel_id":{
+      ".read":"auth!==null",
+       ".write":"auth!==null"
+    }
+  },
     ".read": false,
     ".write": false
   }

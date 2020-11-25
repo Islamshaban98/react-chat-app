@@ -14,7 +14,7 @@ const DachboardToggle = () => {
   const is500px = useMediaQuery('(max-width: 500px)');
   return (
     <>
-      <Button block color="blue" onClick={open}>
+      <Button color="blue" onClick={open}>
         <Icon icon="dashboard" /> Dashboard
       </Button>
       <Drawer
