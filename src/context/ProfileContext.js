@@ -13,8 +13,8 @@ export const ProfileProvider = ({ children }) => {
     const authUnsub = auth.onAuthStateChanged(authObj => {
       if (authObj) {
         userRef = database.ref(`/profiles/${authObj.uid}`);
-        userRef.on('value', script => {
-          const { name, createdAt, avatar } = script.val();
+        userRef.on('value', dataSnapShot => {
+          const { name, createdAt, avatar } = dataSnapShot.val();
           const data = {
             name,
             createdAt,
