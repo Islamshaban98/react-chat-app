@@ -1,13 +1,13 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Divider } from 'rsuite';
-import ChannelsList from '../pages/channels/ChannelsList';
-// import { useProfile } from '../context/ProfileContext';
+import ChannelsList from './channels/ChannelsList';
+import { useProfile } from '../context/ProfileContext';
 import DachboardToggle from './daschdoard/DachboardToggle';
 import RoomBtn from './RoomBtn';
-// import ProfileImage from './profileImage';
+import ProfileImage from './profileImage';
 
 const Sidebar = () => {
-  // const { profile } = useProfile();
+  const { profile } = useProfile();
   const toSidebarRef = useRef();
   const [height, setHight] = useState(0);
 
@@ -25,11 +25,11 @@ const Sidebar = () => {
         <Divider>Join conversation</Divider>
       </div>
       <ChannelsList listHeight={height} />
-      {/* <ProfileImage
+      <ProfileImage
         src={profile.avatar}
         name={profile.name}
         className="width-100 height-100 img-fullsize font-huge"
-      /> */}
+      />
     </div>
   );
 };
