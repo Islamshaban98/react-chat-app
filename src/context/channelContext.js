@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import { database } from '../misc/firebase';
 import { convertToArray } from '../misc/helperFunctions';
 
@@ -23,3 +23,5 @@ export const ChannelsProvider = ({ children }) => {
     </ChannelContext.Provider>
   );
 };
+
+export const useChannels = () => useContext(ChannelContext);
