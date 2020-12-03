@@ -9,6 +9,7 @@ export const ChannelsProvider = ({ children }) => {
   useEffect(() => {
     const channelRef = database.ref('channels');
     channelRef.on('value', dataSnapShot => {
+      // console.log(dataSnapShot.val());
       const channelArray = convertToArray(dataSnapShot.val());
       setChannels(channelArray);
     });

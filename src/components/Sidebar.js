@@ -22,14 +22,17 @@ const Sidebar = () => {
       <div ref={toSidebarRef}>
         <DachboardToggle />
         <RoomBtn />
+        <div className=".w-auto .h-auto ">
+          <ProfileImage
+            src={profile.avatar}
+            name={profile.name}
+            className="width-100 height-100 "
+          />
+        </div>
+        <h6 className="text-center">{profile.name}</h6>
         <Divider>Join conversation</Divider>
       </div>
       <ChannelsList listHeight={height} />
-      <ProfileImage
-        src={profile.avatar}
-        name={profile.name}
-        className="width-100 height-100 img-fullsize font-huge"
-      />
     </div>
   );
 };

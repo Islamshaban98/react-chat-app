@@ -9,18 +9,20 @@ import Chat from './Chat';
 const Home = () => {
   const isDesktop = useMediaQuery('(min-width: 992px)');
   const { isExact } = useRouteMatch();
-  const renderSiderbar = isDesktop || isExact;
+  // console.log(isExact);
+  const renderSidebar = isDesktop || isExact;
+  // console.log(renderSidebar);
   return (
     <ChannelsProvider>
       <Grid fluid className="h-100">
         <Row className="h-100">
-          {renderSiderbar && (
+          {renderSidebar && (
             <Col xs={24} md={8} className="h-100">
               <Sidebar />
             </Col>
           )}
           <Switch>
-            <Route exact path="/chat/:chatId">
+            <Route exact path="/channels/:channelId">
               <Col xs={24} md={16} className="h-100">
                 <Chat />
               </Col>

@@ -7,6 +7,9 @@ import Channel from './Channel';
 export default function ChannelsList({ listHeight }) {
   const channels = useChannels();
   const location = useLocation();
+  // channels.map(channel => console.log(channel.id));
+  // console.log(location.pathname);
+  // console.log(channels.id);
   return (
     <Nav
       appearance="subtle"
