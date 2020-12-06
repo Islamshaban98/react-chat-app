@@ -50,11 +50,26 @@ const RoomBtn = () => {
     }
   };
   return (
-    <div>
-      <Button onClick={open}>
-        Text Channels
-        <Icon icon="plus" />
-      </Button>
+    <div className="mt-3 ">
+      <div
+        className=" d-flex justify-content-between padded"
+        // style={{
+        //   boxShadow: '0px 3px 8px rgba(0, 0, 0, 0.05)',
+        //   // backgroundColor: '#f7f1e3',
+        //   backgroundColor: ' #f1f2f6',
+        //   // opacity: 0.3,
+        // }}
+      >
+        <h6 className="font-family-roboto"> TEXT CHANNELS</h6>
+        <div>
+          <Icon
+            icon="plus"
+            className=" padded cursor-pointer"
+            block
+            onClick={open}
+          />
+        </div>
+      </div>
       <Modal show={isOpen} onHide={close}>
         <Modal.Header>
           <Modal.Title>
@@ -72,7 +87,7 @@ const RoomBtn = () => {
           >
             <FormGroup>
               <ControlLabel>CHANNEL NAME</ControlLabel>
-              <FormControl name="name" placeholder="new-channel" />
+              <FormControl name="name" placeholder="# new-channel" />
             </FormGroup>
           </Form>
         </Modal.Body>

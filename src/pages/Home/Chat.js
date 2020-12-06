@@ -16,7 +16,7 @@ const Chat = () => {
     );
   }
   const currentChannel = channels.find(channel => channel.id === channelId);
-  if (currentChannel) {
+  if (!currentChannel) {
     return (
       <h6 className="text-center mt-page">Channel {channelId} not found</h6>
     );

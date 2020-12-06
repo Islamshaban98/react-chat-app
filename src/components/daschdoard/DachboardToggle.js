@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Icon, Drawer, Alert } from 'rsuite';
+import { Icon, Drawer, Alert } from 'rsuite';
 import { useMediaQuery, useModal } from '../../misc/useModal';
 import Dashboard from '.';
 import { auth } from '../../misc/firebase';
@@ -14,9 +14,11 @@ const DachboardToggle = () => {
   const is500px = useMediaQuery('(max-width: 500px)');
   return (
     <>
-      <Button color="blue" onClick={open}>
-        <Icon icon="dashboard" /> Dashboard
-      </Button>
+      <div className="d-flex justify-content-end ">
+        <div className="padded">
+          <Icon icon="gear-circle" onClick={open} />
+        </div>
+      </div>
       <Drawer
         full={is500px}
         show={isOpen}

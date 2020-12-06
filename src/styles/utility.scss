@@ -116,6 +116,9 @@ $indent_4: 20px;
 .justify-content-center {
   justify-content: center;
 }
+.justify-content-end {
+  justify-content: flex-end;
+}
 
 .padded {
   padding: 10px;
@@ -254,4 +257,13 @@ $indent_4: 20px;
 
 .pb-3 {
   padding-bottom: $indent_3;
+}
+.pl-2 {
+  padding-left: $indent_2;
+}
+.fz-4 {
+  font-size: $indent_4;
+}
+.fz-3 {
+  font-size: $indent_3;
 }

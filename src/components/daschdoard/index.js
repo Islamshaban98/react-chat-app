@@ -21,22 +21,24 @@ const Daschboard = ({ signOut }) => {
   return (
     <>
       <Drawer.Header>
-        <Drawer.Title>Chatting your friends</Drawer.Title>
+        <Drawer.Title className="text-black ">
+          Chatting your friends
+        </Drawer.Title>
       </Drawer.Header>
       <Drawer.Body>
-        {profile.name}
+        <div className="padded font-bolder text-black">{profile.name}</div>
         <LinkSocial />
         <Divider />
         <EditableInput
           defaultValue={profile.name}
           onSave={onSave}
           name="nickname"
-          label={<h6 className="mb-2">Nickname</h6>}
+          label={<h6 className="mb-2 text-black ">Nickname</h6>}
         />
         <AvatarUpload />
       </Drawer.Body>
       <Drawer.Footer>
-        <Button block color="red" onClick={signOut}>
+        <Button block color="violet" onClick={signOut}>
           Log Out {profile.name}
         </Button>
       </Drawer.Footer>

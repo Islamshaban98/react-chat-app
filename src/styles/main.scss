@@ -1,7 +1,7 @@
 @import 'override';
 @import 'utility';
 @import 'utility_colors';
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -98,4 +98,9 @@ $chat-b: 65px;
       opacity: 1;
     }
   }
+}
+.font-family-roboto {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: normal;
 }
