@@ -51,15 +51,7 @@ const RoomBtn = () => {
   };
   return (
     <div className="mt-3 ">
-      <div
-        className=" d-flex justify-content-between padded"
-        // style={{
-        //   boxShadow: '0px 3px 8px rgba(0, 0, 0, 0.05)',
-        //   // backgroundColor: '#f7f1e3',
-        //   backgroundColor: ' #f1f2f6',
-        //   // opacity: 0.3,
-        // }}
-      >
+      <div className=" d-flex justify-content-between padded">
         <h6 className="font-family-roboto"> TEXT CHANNELS</h6>
         <div>
           <Icon
