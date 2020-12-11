@@ -4,11 +4,18 @@
       ".read":"$user_id === auth.uid",
        ".write":"$user_id === auth.uid"
     }
-  },
-  "channels":{
+  }, "channels":{
     ".read":"auth!==null",
     ".write":"auth!==null",
     "$channel_id":{
+      ".read":"auth!==null",
+       ".write":"auth!==null"
+    }
+  },
+      "messages":{
+    ".read":"auth!==null",
+    ".write":"auth!==null",
+    "message_id":{
       ".read":"auth!==null",
        ".write":"auth!==null"
     }
