@@ -5,11 +5,18 @@ export function splitName(name) {
   }
   return splitted[0][0];
 }
+export function hashName(name) {
+  const splitted = name.split(' ');
+  if (splitted.length > 1) {
+    return `${splitted[0]}-${splitted[1]}`;
+  }
+  return splitted[0];
+}
 
 export function convertToArray(dataSnapShot) {
   return dataSnapShot
     ? Object.keys(dataSnapShot).map(channelId => {
-        return { ...dataSnapShot[channelId], id: [channelId] };
+        return { ...dataSnapShot[channelId], id: channelId };
       })
     : [];
 }

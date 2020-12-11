@@ -5,6 +5,7 @@ import Messages from '../../components/chat/messages';
 import Top from '../../components/chat/top';
 import Bottom from '../../components/chat/bottom';
 import { useChannels } from '../../context/channelContext';
+import { CurrentChannelProvider } from '../../context/currentChannelContext';
 
 const Chat = () => {
   const { channelId } = useParams();
@@ -21,8 +22,15 @@ const Chat = () => {
       <h6 className="text-center mt-page">Channel {channelId} not found</h6>
     );
   }
+  const { name, createdAt, topic } = currentChannel;
+  const currentChannelData = {
+    name,
+    createdAt,
+    topic,
+  };
+
   return (
-    <>
+    <CurrentChannelProvider data={currentChannelData}>
       <div className="chat-top">
         <Top />
       </div>
@@ -32,7 +40,7 @@ const Chat = () => {
       <div className="chat-bottom">
         <Bottom />
       </div>
-    </>
+    </CurrentChannelProvider>
   );
 };
 

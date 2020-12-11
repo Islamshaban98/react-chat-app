@@ -20,12 +20,14 @@ const model = Schema.Model({
 });
 const RoomBtn = () => {
   const [name, setName] = useState('');
+  const [topic, setTopic] = useState('');
   const { open, isOpen, close } = useModal();
   const [isLoading, setisLoading] = useState(false);
   const formRef = useRef();
 
   const handleChange = value => {
     setName(value);
+    setTopic(value);
   };
 
   const onSubmit = async () => {
@@ -44,6 +46,7 @@ const RoomBtn = () => {
       Alert.success(`${channelData.name} created successfully`);
       setisLoading(false);
       setName(name);
+      setTopic(topic);
     } catch (err) {
       setisLoading(false);
       Alert.error(err.message, 4000);
@@ -80,11 +83,18 @@ const RoomBtn = () => {
             <FormGroup>
               <ControlLabel>CHANNEL NAME</ControlLabel>
               <FormControl name="name" placeholder="# new-channel" />
+              <ControlLabel>CHANNEL TOPIC</ControlLabel>
+              <FormControl
+                name="topic"
+                rows={5}
+                componentClass="textarea"
+                placeholder="let every one know how to use this channel ..."
+              />
             </FormGroup>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={onSubmit} disabled={isLoading}>
+          <Button appearance="primary" onClick={onSubmit} disabled={isLoading}>
             Create Channel
           </Button>
         </Modal.Footer>
