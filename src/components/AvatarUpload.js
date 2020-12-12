@@ -8,6 +8,7 @@ import { useModal } from '../misc/useModal';
 import { database, storage } from '../misc/firebase';
 import { useProfile } from '../context/ProfileContext';
 import ProfileImage from './profileImage';
+import { getUserUpdate } from '../misc/helperFunctions';
 
 const AvatarUpload = () => {
   const [avatar, setAvatar] = useState(null);
@@ -52,7 +53,15 @@ const AvatarUpload = () => {
         cacheControl: `public, max-age=${3600 * 24 * 3}`,
       });
       const downloadUrl = await uploadAvatarResult.ref.getDownloadURL();
-      database.ref(`/profiles/${profile.uid}`).child('avatar').set(downloadUrl);
+      const update = await getUserUpdate(
+        profile.uid,
+        'avatar',
+        downloadUrl,
+        database
+      );
+      await database.ref().update(update);
+      // await database.ref().update(update);
+      // database.ref(`/profiles/${profile.uid}`).child('avatar').set(downloadUrl);
       setIsloading(false);
       Alert.success('upload avatar successfully', 4000);
     } catch (err) {

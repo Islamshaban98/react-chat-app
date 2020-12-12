@@ -20,3 +20,32 @@ export function convertToArray(dataSnapShot) {
       })
     : [];
 }
+
+export async function getUserUpdate(userId, keyToUpdate, value, database) {
+  const update = {};
+  update[`/profiles/${userId}/${keyToUpdate}`] = value;
+  const getMsgs = database
+    .ref('/messages')
+    .orderByChild('author/uid')
+    .equalTo(userId)
+    .once('value');
+  const getChannels = database
+    .ref('/channels')
+    .orderByChild('lastMessage/author/uid')
+    .equalTo(userId)
+    .once('value');
+  const [messagesSnapShot, channelsSnapShot] = await Promise.all([
+    getMsgs,
+    getChannels,
+  ]);
+  messagesSnapShot.forEach(msgSnapShot => {
+    update[`/messages/${msgSnapShot.key}/author/${keyToUpdate}`] = value;
+  });
+  channelsSnapShot.forEach(channelSnapShot => {
+    update[
+      `/channels/${channelSnapShot.key}/lastMessage/author/${keyToUpdate}`
+    ] = value;
+  });
+
+  return update;
+}
