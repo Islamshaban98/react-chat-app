@@ -13,7 +13,7 @@ function assembleMessage(profile, channelId) {
     author: {
       name: profile.name,
       uid: profile.uid,
-      // createdAt: profile.createdAt,
+      createdAt: profile.createsAt,
       ...(profile.avatar ? { avatar: profile.avatar } : {}),
     },
     createdAt: firebase.database.ServerValue.TIMESTAMP,

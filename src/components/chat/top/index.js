@@ -26,7 +26,7 @@ const Top = () => {
           />
           <span className="text-disappear pl-2 text-blue  ">
             {' '}
-            # {hashName(name)}
+            <Icon icon="hashtag" size="2x" /> {hashName(name)}
           </span>
         </h4>
         <ButtonToolbar className="ws-nowrap">Todo</ButtonToolbar>
