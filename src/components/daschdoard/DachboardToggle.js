@@ -2,13 +2,23 @@ import React from 'react';
 import { Icon, Drawer, Alert } from 'rsuite';
 import { useMediaQuery, useModal } from '../../misc/useModal';
 import Dashboard from '.';
-import { auth } from '../../misc/firebase';
+import { auth, database } from '../../misc/firebase';
+import { isOfflineForDatabase } from '../../context/ProfileContext';
 
 const DachboardToggle = () => {
   const { open, close, isOpen } = useModal();
+
   const signOut = () => {
-    auth.signOut();
-    Alert.info('you have been logged out', 4000);
+    database
+      .ref(`/status/${auth.currentUser.uid}`)
+      .set(isOfflineForDatabase)
+      .then(() => {
+        auth.signOut();
+        close();
+      })
+      .catch(err => {
+        Alert.info(err, 4000);
+      });
   };
 
   const is500px = useMediaQuery('(max-width: 500px)');

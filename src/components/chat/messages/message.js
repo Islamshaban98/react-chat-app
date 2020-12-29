@@ -1,22 +1,24 @@
 import React from 'react';
 import TimeAgo from 'timeago-react';
+import PresenceDot from '../../PresenceDot';
 import ProfileImage from '../../profileImage';
 import ProfileInfoModal from './ProfileInfoModal';
 
 export default function Message({ messages }) {
   const { author, createdAt, message } = messages;
   const messageSince = new Date(createdAt).toLocaleDateString();
-  console.log(messageSince);
 
   return (
     <li className="padded mb-1">
       <div className="d-flex align-items-center font-bolder mb-1">
+        <PresenceDot uid={author.uid} />
         <ProfileImage
           src={author.avatar}
           name={author.name}
           className="ml-1"
           size="sm"
         />
+
         {/* <span className="ml-2 font-family-roboto  text-black">
           {author.name}
         </span> */}

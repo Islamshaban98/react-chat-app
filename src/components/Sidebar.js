@@ -5,6 +5,7 @@ import { useProfile } from '../context/ProfileContext';
 import DachboardToggle from './daschdoard/DachboardToggle';
 import RoomBtn from './RoomBtn';
 import ProfileImage from './profileImage';
+import PresenceDot from './PresenceDot';
 
 const Sidebar = () => {
   const { profile } = useProfile();
@@ -28,9 +29,14 @@ const Sidebar = () => {
             className="width-100 height-100 img-fullsize "
           />
         </div>
+
         <h6 className="text-center mt-3 text-black font-family-roboto fz-4 ">
           {profile.name}
+          <span className="padded">
+            <PresenceDot uid={profile.uid} />
+          </span>
         </h6>
+
         <p className="text-center text-black-45 mt-3 font-family-roboto fz-3">
           My acount
         </p>
