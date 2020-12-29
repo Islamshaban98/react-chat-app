@@ -1,6 +1,7 @@
 import React from 'react';
 import TimeAgo from 'timeago-react';
 import { hashName } from '../../misc/helperFunctions';
+import EditChannel from './EditChannel';
 import ProfileImage from '../profileImage';
 
 export default function Channel({ channel }) {
@@ -9,12 +10,15 @@ export default function Channel({ channel }) {
     <div>
       <div className="d-flex justify-content-between align-items-center mt-1">
         <h6 className="font-family-roboto"># {hashName(name)}</h6>
+        <div className="d-flex justify-content-between align-items-center mt-1">
         <TimeAgo
           datetime={
             lastMessage ? new Date(lastMessage.createdAt) : new Date(createdAt)
           }
           className="font-family-roboto text-black-45"
         />
+         <EditChannel channel={channel}/>
+        </div>
       </div>
       <div className="d-flex align-items-center text-black-45">
         {lastMessage ? (

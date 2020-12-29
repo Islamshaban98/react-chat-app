@@ -6,11 +6,13 @@ export function splitName(name) {
   return splitted[0][0];
 }
 export function hashName(name) {
-  const splitted = name.split(' ');
-  if (splitted.length > 1) {
-    return `${splitted[0]}-${splitted[1]}`;
-  }
-  return splitted[0];
+  const replaced = name.replace(/\s/g, '_')
+  return replaced;
+  // const splitted = name.split(' ');
+  // if (splitted.length > 1) {
+  //   return `${splitted[0]}-${splitted[1]}-${splitted[2]}`;
+  // }
+  // return splitted[0];
 }
 
 export function convertToArray(dataSnapShot) {
